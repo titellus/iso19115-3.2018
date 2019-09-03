@@ -43,6 +43,9 @@
   <!-- Enable INSPIRE or not -->
   <xsl:param name="inspire">false</xsl:param>
 
+  <xsl:variable name="apur-themes"
+                select="document(concat('file:///', replace($thesauriDir, '\\', '/'), '/external/thesauri/theme/apur-themes.rdf'))//skos:Concept"/>
+
   <xsl:variable name="df">[Y0001]-[M01]-[D01]T[H01]:[m01]:[s01]</xsl:variable>
 
   <!-- If identification citation dates
@@ -115,7 +118,7 @@
             </xsl:when>
             <xsl:otherwise>
               <!-- <xsl:value-of select="normalize-space(string(.))"/> -->
-              <!-- Index all text nodes except those that are in a bounding 
+              <!-- Index all text nodes except those that are in a bounding
                    polygon -->
               <xsl:for-each select="//text()[not(ancestor::gex:EX_BoundingPolygon) and normalize-space()!='']">
                  <xsl:value-of select="concat(.,' ')"/>
@@ -224,7 +227,7 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:function>
-  
+
 
   <xsl:template name="CommonFieldsFactory">
     <xsl:param name="lang" select="$documentMainLanguage"/>
@@ -263,7 +266,7 @@
           </xsl:for-each>
         </xsl:attribute>
       </Field>
-      
+
       <xsl:for-each select="mri:citation/*">
         <xsl:for-each select="cit:identifier/mcc:MD_Identifier/mcc:code">
           <xsl:copy-of select="gn-fn-iso19115-3.2018:index-field('identifier', ., $langId)"/>
@@ -389,6 +392,18 @@
         <xsl:for-each select="mri:keyword">
           <xsl:copy-of select="gn-fn-iso19115-3.2018:index-field('keyword', ., $langId)"/>
 
+          <!-- APUR -->
+          <xsl:variable name="keyword"
+                        select="gco:CharacterString"/>
+          <xsl:variable name="apurTheme"
+                        select="$apur-themes[skos:prefLabel/normalize-space() = normalize-space($keyword)]"/>
+          <xsl:if test="count($apurTheme) > 0">
+            <xsl:variable name="apurUri"
+                          select="$apurTheme/@rdf:about"/>
+            <Field name="apurTheme" string="{$keyword}" store="true" index="true"/>
+            <Field name="apurThemeWithId" string="{concat(replace($apurUri, 'https://www.apur.org/registre/themes/', ''), '|', $keyword)}" store="true" index="true"/>
+          </xsl:if>
+
           <xsl:if test="$fieldNameTemp != ''">
             <!-- field thesaurus-{{thesaurusIdentifier}}={{keyword}} allows
             to group all keywords of same thesaurus in a field -->
@@ -465,6 +480,7 @@
              string="{normalize-space($listOfKeywords)}"
              store="true"
              index="false"/>
+
 
       <xsl:for-each select="mri:topicCategory/mri:MD_TopicCategoryCode[text() != '']">
         <Field name="topicCat" string="{string(.)}" store="true" index="true"/>
