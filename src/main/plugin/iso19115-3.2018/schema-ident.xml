@@ -109,7 +109,7 @@ Ce schéma est également composé des normes :
     preserved but with no content in.
     -->
     <filter xpath="*//*[@gco:nilReason='withheld']"
-            ifNotOperation="editing">
+            ifNotOperation="download">
       <keepMarkedElement gco:nilReason="withheld"/>
     </filter>
 
@@ -117,12 +117,12 @@ Ce schéma est également composé des normes :
     All online source having the following protocols
     are filtered when user does not have download
     privilege.
-    -->
+
     <filter xpath="*//mrd:onLine[contains(*/cit:protocol/gco:CharacterString, 'DOWNLOAD') or
                                   */cit:protocol/gco:CharacterString = 'FILE' or
                                   */cit:protocol/gco:CharacterString = 'DB' or
                                   */cit:protocol/gco:CharacterString = 'COPYFILE']"
-            ifNotOperation="download"/>
+            ifNotOperation="download"/>-->
 
     <!--
     All online source having WMS protocol are filtered

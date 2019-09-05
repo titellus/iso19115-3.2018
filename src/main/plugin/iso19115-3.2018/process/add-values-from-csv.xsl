@@ -62,11 +62,11 @@
       <suggestion process="add-values-from-csv" id="{generate-id()}"
                   category="fcat" target="gfc:carrierOfCharacteristics">
         <name>
-          <xsl:value-of select="concat(geonet:i18n($csv-add-values-info-loc, 'a', $guiLang), ' ', gfc:memberName/*)"/>
+          <xsl:value-of select="concat(geonet:i18n($csv-add-values-info-loc, 'a', $guiLang), ' ', gfc:memberName)"/>
         </name>
         <operational>true</operational>
         <params>{
-          "column":{"type":"string", "defaultValue":"<xsl:value-of select="gfc:memberName/*"/>"},
+          "column":{"type":"string", "defaultValue":"<xsl:value-of select="gfc:memberName"/>"},
           "replaceListOfValues":{"type":"boolean", "defaultValue":"1"},
           "listOfValuesSeparator":{"type":"string", "defaultValue":"<xsl:value-of select="$listOfValuesSeparator"/>"},
           "listOfValuesAsCsv":{"type":"textarea", "defaultValue":"LABEL;CODE;DEFINITION"}
@@ -75,7 +75,7 @@
     </xsl:for-each>
   </xsl:template>
 
-  <xsl:template match="gfc:carrierOfCharacteristics/*[gfc:memberName/* = $column]" priority="99">
+  <xsl:template match="gfc:carrierOfCharacteristics/*[gfc:memberName = $column]" priority="99">
     <xsl:copy>
       <xsl:apply-templates select="@*"/>
       <xsl:apply-templates select="*[name() != 'gfc:listedValue']"/>
