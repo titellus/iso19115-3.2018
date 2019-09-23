@@ -609,7 +609,7 @@
       <!-- FIXME: Additional constraints have been created in the mco schema -->
       <xsl:for-each select="mri:resourceConstraints">
         <xsl:for-each select="//mco:otherConstraints">
-          <xsl:copy-of select="gn-fn-iso19115-3.2018:index-field('otherConstr', ., $langId)"/>
+          <xsl:copy-of select="gn-fn-iso19115-3.2018:index-field('MD_LegalConstraintsOtherConstraints', ., $langId)"/>
         </xsl:for-each>
         <xsl:for-each select="//mco:useLimitation">
           <xsl:copy-of select="gn-fn-iso19115-3.2018:index-field('conditionApplyingToAccessAndUse', ., $langId)"/>
