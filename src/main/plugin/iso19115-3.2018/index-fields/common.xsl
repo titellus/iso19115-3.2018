@@ -169,7 +169,7 @@
     <!--<xsl:message><xsl:value-of select="$fieldName"/>:<xsl:value-of select="normalize-space($value)"/> (<xsl:value-of select="$langId"/>) </xsl:message>-->
     <xsl:if test="normalize-space($value) != ''">
       <Field name="{$fieldName}"
-             string="{normalize-space($value)}"
+             string="{$value}"
              store="{$store}"
              index="{$index}"/>
     </xsl:if>
@@ -807,7 +807,7 @@
         <xsl:if test="count($attributes) > 0">
           "attributeTable" : [
           <xsl:for-each select="$attributes">
-            {"name": "<xsl:value-of select="gn-fn-index:json-escape(*/gfc:memberName/*/text())"/>",
+            {"name": "<xsl:value-of select="gn-fn-index:json-escape(*/gfc:memberName/text())"/>",
             "definition": "<xsl:value-of select="gn-fn-index:json-escape(*/gfc:definition/*/text())"/>",
             "code": "<xsl:value-of select="*/gfc:code/*/text()"/>",
             "link": "<xsl:value-of select="*/gfc:code/*/@xlink:href"/>",
