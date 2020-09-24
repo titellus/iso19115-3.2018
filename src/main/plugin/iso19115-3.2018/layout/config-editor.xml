@@ -360,7 +360,7 @@
       <name>srv:serviceTypeVersion</name>
     </exclude>
   </multilingualFields>
-  
+
   <tableFields>
     <!-- This is an example for organisation table layout.
     19115-3 being more flexible with link between orgs and individual,
@@ -434,6 +434,7 @@
       <!-- Elements that should not use the "flat" mode -->
       <flatModeExceptions>
         <for name="mri:descriptiveKeywords"/>
+        <for name="cit:date"/>
         <for name="mri:pointOfContact"/>
         <for name="mrd:distributor"/>
         <for name="mdb:contact"/>
