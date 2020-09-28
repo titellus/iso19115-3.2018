@@ -101,8 +101,8 @@
 
     <for name="mdb:contact" addDirective="data-gn-directory-entry-selector">
       <directiveAttributes
-              data-template-add-action="true"
-              data-search-action="false"
+              data-template-add-action="false"
+              data-search-action="true"
               data-popup-action="true"
               data-template-type="contact"
               data-filter='{"_root": "cit:CI_Responsibility"}'
@@ -117,8 +117,8 @@
       <!-- To use an ISO19139 contact directory in an ISO19115-3 record
       use the following configuration: -->
       <directiveAttributes
-              data-template-add-action="true"
-              data-search-action="false"
+              data-template-add-action="false"
+              data-search-action="true"
               data-popup-action="true"
               data-template-type="contact"
               data-filter='{"_root": "gmd:CI_ResponsibleParty"}'
@@ -127,8 +127,8 @@
     </for>
     <for name="mrd:distributor" addDirective="data-gn-directory-entry-selector">
       <directiveAttributes
-              data-template-add-action="true"
-              data-search-action="false"
+              data-template-add-action="false"
+              data-search-action="true"
               data-popup-action="true"
               data-template-type="contact"
               data-filter='{"_root": "gmd:CI_ResponsibleParty"}'
@@ -137,8 +137,8 @@
     </for>
     <for name="mrl:processor" addDirective="data-gn-directory-entry-selector">
       <directiveAttributes
-              data-template-add-action="true"
-              data-search-action="false"
+              data-template-add-action="false"
+              data-search-action="true"
               data-popup-action="true"
               data-template-type="contact"
               data-filter='{"_root": "gmd:CI_ResponsibleParty"}'
@@ -147,8 +147,8 @@
     </for>
     <for name="cit:citedResponsibleParty" addDirective="data-gn-directory-entry-selector">
       <directiveAttributes
-              data-template-add-action="true"
-              data-search-action="false"
+              data-template-add-action="false"
+              data-search-action="true"
               data-popup-action="true"
               data-template-type="contact"
               data-filter='{"_root": "gmd:CI_ResponsibleParty"}'
@@ -370,12 +370,14 @@
         <col label="cit:role"/>
         <col label="cit:CI_Organisation"/>
         <col label="cit:electronicMailAddress"/>
+        <col label="cit:linkage"/>
         <col/>
       </header>
       <row>
         <col xpath="cit:role"/>
         <col xpath="cit:party/cit:CI_Organisation/cit:name"/>
         <col xpath="cit:party/*/cit:contactInfo/*/cit:address/*/cit:electronicMailAddress"/>
+        <col xpath="cit:party/*/cit:contactInfo/*/cit:onlineResource/*/cit:linkage"/>
         <col del=".."/>
       </row>
     </table>
@@ -437,6 +439,8 @@
         <for name="cit:date"/>
         <for name="mri:pointOfContact"/>
         <for name="mrd:distributor"/>
+        <for name="mrd:distributionFormat"/>
+        <for name="mrd:formatSpecificationCitation"/>
         <for name="mdb:contact"/>
         <for name="mcc:processor"/>
         <for name="cit:party"/>
